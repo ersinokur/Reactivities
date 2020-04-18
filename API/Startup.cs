@@ -31,6 +31,13 @@ namespace API
 
                   opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));  
             });
+            //clientlarda CORS hatası almamak için aşağıdaki servisi ekliyoruz.
+            services.AddCors(opt => {
+                opt.AddPolicy("CorsePolicy", policy => {
+                    policy.AllowAnyHeader().AllowAnyMethod().
+                    WithOrigins("http://localhost:3000");//react client portu
+                });
+            });
             services.AddControllers();
         }
 
@@ -48,6 +55,10 @@ namespace API
             app.UseRouting();
 
             app.UseAuthorization();
+
+// client'lardan cors erişim hatası almamak için ekliyoruz.
+// CorsePolicy configureServiste verdiğimiz isimle aynı olmalı!
+app.UseCors("CorsePolicy");
 
             app.UseEndpoints(endpoints =>
             {
