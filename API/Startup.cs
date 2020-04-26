@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Activities;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +40,11 @@ namespace API
                     WithOrigins("http://localhost:3000");//react client portu
                 });
             });
+
+            //mediator servisini ekledik
+              services.AddMediatR(typeof(List.Handler).Assembly);
+            //  services.AddMediatR(typeof(Details.Handler).Assembly);
+
             services.AddControllers();
         }
 

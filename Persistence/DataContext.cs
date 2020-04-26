@@ -10,6 +10,7 @@ namespace Persistence
 
         //domain projesindeki value entity
         public DbSet<Value> Values {get;set;}
+        public DbSet<Activity> Activities {get;set;}
 
 //seed value için ekliyoruz.
         protected override void OnModelCreating(ModelBuilder builder){
